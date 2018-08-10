@@ -9,6 +9,20 @@ gulp.task('default', function() {
 
 })
 
+function imagesResize(percent, sufixResolution) {
+    gulp.src('SiteZeus/**/*.{png,jpg}')
+        .pipe(parallel(
+            resize({
+                percentage : percent
+            }),
+            os.cpus().length
+        ))
+        .pipe(rename(function(path) {
+            path.basename += sufixResolution
+        }))
+        .pipe(gulp.dest('dist'))
+}
+
 gulp.task('webp-convert', function () {
     gulp.src('SiteZeus/**/*.{jpg,png}')
         .pipe(webp({ quality: 100 }))
