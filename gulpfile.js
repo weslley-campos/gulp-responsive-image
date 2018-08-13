@@ -15,7 +15,7 @@ gulp.task('default', ['build'], function () {
 })
 
 gulp.task('build', function (callback) {
-    return sequence('copy', 'rename-images', 'webp-convert', callback)
+    return sequence('copy', 'webp-convert', 'rename-images',callback)
 })
 
 function imagesResize(percent, sufixResolution) {
@@ -33,7 +33,7 @@ function imagesResize(percent, sufixResolution) {
 }
 
 gulp.task('rename-images', function () {
-    return gulp.src("SiteZeus/**/*.{png,jpg}")
+    return gulp.src("SiteZeus/**/*.{png,jpg,webp}")
         .pipe(rename(function (path) {
             path.basename += "_1080"
         }))
