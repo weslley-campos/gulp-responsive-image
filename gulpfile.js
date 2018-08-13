@@ -35,7 +35,7 @@ function imagesResize(percent, sufixResolution) {
 gulp.task('rename-images', function () {
     return gulp.src("SiteZeus/**/*.{png,jpg,webp}")
         .pipe(rename(function (path) {
-            path.basename += "_1080"
+            path.basename += "_1920"
         }))
         .pipe(gulp.dest("dist/SiteZeus"))
 })
@@ -43,7 +43,7 @@ gulp.task('rename-images', function () {
 gulp.task('webp-convert', function () {
     return gulp.src('SiteZeus/**/*.{jpg,png}')
         .pipe(webp({ quality: 100 }))
-        .pipe(gulp.dest('dist/SiteZeus'))
+        .pipe(gulp.dest('SiteZeus'))
 })
 
 gulp.task('copy', function () {
