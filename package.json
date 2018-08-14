@@ -1,7 +1,6 @@
 {
-  "name": "ImagesHandler",
+  "name": "imageshandler",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
@@ -18,5 +17,14 @@
     "gulp": "gulp"
   },
   "author": "Weslley Campos",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weslley-campos/gulp-responsive-image.git"
+  },
+  "bugs": {
+    "url": "https://github.com/weslley-campos/gulp-responsive-image/issues"
+  },
+  "homepage": "https://github.com/weslley-campos/gulp-responsive-image#readme",
+  "description": ""
 }
