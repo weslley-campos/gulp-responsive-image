@@ -8,8 +8,7 @@ const gulp = require('gulp')
     , os = require('os')
 
 const suffix = ['_460', '_768', '_1024', '_1366','_1920']
-    , srcFolder = 'SiteZeus'
-    , destFolder = 'SiteZeus'
+    , folder = 'SiteZeus'
 
 gulp.task('default', ['build'], function () {
     gulp.task('imageResize25', imagesResize(25, suffix[0]))
@@ -20,11 +19,11 @@ gulp.task('default', ['build'], function () {
 })
 
 gulp.task('build', function (callback) {
-    return sequence('clean','copy', 'webp-convert', callback)
+    return sequence('clean', 'webp-convert', callback)
 })
 
-function imagesResize(percent, sufixResolution) {
-    gulp.src("SiteZeus/**/*.{png,jpg,webp}")
+function imagesResize(percent, suffixResolution) {
+    gulp.src(folder + "/**/*.{png,jpg,webp}")
         .pipe(parallel(
             resize({
                 percentage: percent
@@ -32,38 +31,25 @@ function imagesResize(percent, sufixResolution) {
             os.cpus().length
         ))
         .pipe(rename(function (path) {
-            path.basename += sufixResolution
+            path.basename += suffixResolution
         }))
-        .pipe(gulp.dest("dist/SiteZeus"))
+        .pipe(gulp.dest(folder))
 }
 
 gulp.task('webp-convert', function () {
-    return gulp.src('SiteZeus/**/*.{jpg,png}')
+    return gulp.src(folder + "/**/*.{jpg,png}")
         .pipe(webp({ quality: 100 }))
-        .pipe(gulp.dest('SiteZeus'))
-})
-
-gulp.task('copy', function () {
-    return gulp.src("copy/**/*")
-        .pipe(gulp.dest("."))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest(folder))
 })
 
 gulp.task('clean', function () {
     return gulp.src([
-        'dist/SiteZeus/**/*'+ suffix[0] + '.{jpg,png,webp}',
-        'dist/SiteZeus/**/*'+ suffix[1] + '.{jpg,png,webp}',
-        'dist/SiteZeus/**/*'+ suffix[2] + '.{jpg,png,webp}',
-        'dist/SiteZeus/**/*'+ suffix[3] + '.{jpg,png,webp}',
-        'dist/SiteZeus/**/*'+ suffix[4] + '.{jpg,png,webp}'
+        folder + "/**/*"+ suffix[0] + ".{jpg,png,webp}",
+        folder + "/**/*"+ suffix[1] + ".{jpg,png,webp}",
+        folder + "/**/*"+ suffix[2] + ".{jpg,png,webp}",
+        folder + "/**/*"+ suffix[3] + ".{jpg,png,webp}",
+        folder + "/**/*"+ suffix[4] + ".{jpg,png,webp}",
+        folder + "/**/*.webp"
     ])
     .pipe(clean())
 })
-
-// gulp.task('rename-images', function () {
-//     return gulp.src("SiteZeus/**/*.{png,jpg,webp}")
-//         .pipe(rename(function (path) {
-//             path.basename += "_1920"
-//         }))
-//         .pipe(gulp.dest("dist/SiteZeus"))
-// })
